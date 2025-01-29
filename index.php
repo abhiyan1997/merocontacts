@@ -20,6 +20,17 @@
             margin-bottom: 20px;
         }
 
+        .logout_btn
+        {
+            width: 100px;
+            height: 40px;
+            cursor: pointer;
+            float:right;
+            position:absolute;
+            right:0;
+            transform: translate(-100%,-140%)
+        }
+
         .main
         {
             background-color: skyblue;
@@ -57,10 +68,24 @@
 
     </style>
 </head>
+
+<?php
+session_start();
+if(!isset($_SESSION['username']))
+{
+    header('Location:login.php');
+}
+?>
+
 <body>
     <div class="head">
     <h1>MeroContacts</h1>
+    <form action="logout.php">
+    <button type="submit" class="logout_btn">Logout</button>
+    </form>
     </div>
+
+    <h3> <?php echo "Welcome ". $_SESSION['username']; ?></h3>
 
     <div class="main">
     <form action="adddata.php" method="post">
