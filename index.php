@@ -84,9 +84,9 @@ if(!isset($_SESSION['username']))
     <button type="submit" class="logout_btn">Logout</button>
     </form>
     </div>
-
-    <h3> <?php echo "Welcome ". $_SESSION['username']; ?></h3>
-
+    <?php   
+        echo "<h3> Welcome ". $_SESSION['name'] . "</h3>";
+    ?>
     <div class="main">
     <form action="adddata.php" method="post">
     <label>Name of Contact:</label>
@@ -104,7 +104,8 @@ if(!isset($_SESSION['username']))
     <span>Total contacts- 
     <?php 
     include 'db.php';
-    $total_sql= "SELECT COUNT(*) as total FROM contacts" ;
+    $user_id= $_SESSION['user_id'];
+    $total_sql= "SELECT COUNT(*) as total FROM contacts WHERE user_id= '$user_id' " ;
     $total_result= mysqli_query($conn, $total_sql);
 
     if($total_result)
@@ -124,7 +125,7 @@ if(!isset($_SESSION['username']))
 
     <?php
     include 'db.php';
-    $sql= "SELECT * FROM contacts";
+    $sql = "SELECT * FROM `contacts` WHERE `user_id` = '". $_SESSION['user_id']."' ";
     $result= mysqli_query($conn, $sql);
 
     if($result)
